@@ -28,7 +28,4 @@ class DbInit implements IDbInit
         return $this->client;
     }
 }
-
-
-
 ?>
