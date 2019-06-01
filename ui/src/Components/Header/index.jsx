@@ -43,9 +43,7 @@ const Signup = () => {
 	return <SignupContent>Sign up</SignupContent>;
 };
 
-const Signin = () => {
-	return <SigninContent>Sign in</SigninContent>;
-};
+const Signin = () => <SigninContent>Sign in</SigninContent>;
 
 class Header extends Component {
 	render() {
