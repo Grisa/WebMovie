@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { Input, Button } from "semantic-ui-react";
 
@@ -54,28 +55,73 @@ class Signin extends Component {
 		password: ""
 	};
 
+	handleChange = field => ({ target }) => {
+		this.setState({
+			[field]: target.value
+		});
+	};
+
+	validateField = () => {
+		const { login, password } = this.state;
+
+		let isOkay = true;
+
+		if (!login) {
+			isOkay = false;
+		}
+
+		if (!password) {
+			isOkay = false;
+		}
+
+		if (!isOkay) {
+			this.setState({
+				step1: 2
+			});
+		}
+
+		return isOkay;
+	};
+
 	verifyUser = async () => {
-		const { data } = await Api.post("actionrequest.php", {
-			restType: "validUser",
-			username: "China",
-			password: 111111
+		const { password, login } = this.state;
+
+		if (!this.validateField()) {
+			return;
+		}
+
+		await Api.get("actionrequest.php", {
+			params: {
+				restType: "validUser",
+				username: password,
+				password: login
+			}
 		});
 
-		console.log(data);
+		// Fazer o login do usuário aqui
+		console.log(1);
+
+		this.goto("/home")();
+	};
+
+	goto = route => () => {
+		this.props.history.push(route);
 	};
 
 	render() {
+		const { login, password } = this.state;
+
 		return (
 			<Container>
 				<Box>
 					<Logo variant="outline" alignItems="center" />
 					<InputLabel>
 						<span>Login</span>
-						<Input />
+						<Input onChange={this.handleChange("login")} value={login} />
 					</InputLabel>
 					<InputLabel>
 						<span>Senha</span>
-						<Input />
+						<Input onChange={this.handleChange("password")} value={password} />
 					</InputLabel>
 					<ButtonLabel>
 						<Button
@@ -87,11 +133,13 @@ class Signin extends Component {
 							onClick={this.verifyUser}>
 							SUBMIT
 						</Button>
-						<span>Não possui conta?</span>
+						<span onClick={this.goto("/signup")}>Não possui conta?</span>
 						<span>Esqueceu a senha?</span>
 					</ButtonLabel>
 					<Label>
-						<span style={{ width: "140px" }}>Voltar para a home</span>
+						<span onClick={this.goto("/home")} style={{ width: "140px" }}>
+							Voltar para a home
+						</span>
 						<span style={{ width: "140px", textAlign: "right" }}>Duvidas?</span>
 					</Label>
 				</Box>
@@ -100,4 +148,4 @@ class Signin extends Component {
 	}
 }
 
-export default Signin;
+export default withRouter(Signin);
