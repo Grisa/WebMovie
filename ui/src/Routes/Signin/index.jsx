@@ -4,6 +4,8 @@ import { Input, Button } from "semantic-ui-react";
 
 import Logo from "../../Components/Logo";
 
+import Api from "../../Services/Api";
+
 const Container = styled.div`
 	background-color: #7d4cdb;
 	width: 100%;
@@ -50,6 +52,16 @@ class Signin extends Component {
 		password: ""
 	};
 
+	verifyUser = async () => {
+		const { data } = await Api.post("actionrequest.php", {
+			restType: "validUser",
+			username: "China",
+			password: 111111
+		});
+
+		console.log(data);
+	};
+
 	render() {
 		return (
 			<Container>
@@ -69,7 +81,8 @@ class Signin extends Component {
 								backgroundColor: "#7D4CDB",
 								color: "#f4f4f4",
 								width: "130px"
-							}}>
+							}}
+							onClick={this.verifyUser}>
 							SUBMIT
 						</Button>
 						<span>Não possui conta?</span>
