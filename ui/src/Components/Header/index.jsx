@@ -21,18 +21,18 @@ const midia = [
 class Header extends Component {
 	render() {
 		return (
-			<Grid style={{ paddingTop: "20px" }} centered>
-				<Grid.Row centered>
-					<Grid.Column width={2} verticalAlign="middle" textAlign="center">
+			<Grid style={{ paddingTop: "20px" }}>
+				<Grid.Row columns={16}>
+					<Grid.Column width={2} verticalAlign="middle">
 						<Logo />
 					</Grid.Column>
-					<Grid.Column width={10}>
+					<Grid.Column width={12}>
 						<MenuList options={options} midia={midia} />
 					</Grid.Column>
-					<Grid.Column width={1}>
+					<Grid.Column floated="right">
 						<Signin />
 					</Grid.Column>
-					<Grid.Column width={2}>
+					<Grid.Column style={{ padding: "0" }} floated="right" width={1}>
 						<Signup />
 					</Grid.Column>
 				</Grid.Row>

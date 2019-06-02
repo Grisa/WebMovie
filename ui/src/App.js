@@ -4,10 +4,8 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 
 import Header from "./Components/Header";
 
-import Home from "./Routes/Home/index";
-
-const teste2 = () => (<div>teste 2</div>);
-
+import Home from "./Routes/Home";
+import Signin from "./Routes/Signin";
 
 class App extends Component {
   teste = async () => {
@@ -16,17 +14,18 @@ class App extends Component {
 
   render() {
     const { pathname } = this.props.location;
+    const isSign = pathname.match(/\/sign/);
 
     return (
-      <div>
+      <div style={{ padding: !isSign ? "0 140px" : 0, height: "100%", width: "100%" }}>
         {
-          pathname.match(/\/sign/)
+          isSign
             ? null
             : <Header />
         }
         <Switch>
           <Route exact path='/home' component={Home} />
-          <Route path='/teste2' component={teste2} />
+          <Route path='/signin' component={Signin} />
         </Switch>
       </div >
     );

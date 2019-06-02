@@ -9,9 +9,10 @@ const SignupContent = styled.h1`
 	font-weight: bold;
 	border: 3px solid #7d4cdb;
 	border-radius: 35px;
-	width: fit-content;
-	padding: 5px 20px;
+	width: 94px;
+	padding: 5px 10px;
 	height: 100%;
+	line-height: 30px;
 `;
 const Signup = () => (
 	<Link to="/signup">

@@ -7,9 +7,10 @@ const SigninContent = styled.h1`
 	text-align: center;
 	color: #7d4cdb;
 	font-weight: bold;
-	width: fit-content;
-	padding: 8px 20px;
+	width: 100%;
+	padding: 8px 10px;
 	height: 100%;
+	line-height: 30px;
 `;
 
 const Signin = () => (
