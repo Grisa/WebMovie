@@ -7,6 +7,8 @@ import Logo from "../../Components/Logo";
 import Api from "../../Services/Api";
 
 const Container = styled.div`
+	color: #7d4cdb;
+	font-weight: bold;
 	background-color: #7d4cdb;
 	width: 100%;
 	height: 100%;
@@ -16,8 +18,6 @@ const Container = styled.div`
 `;
 
 const Box = styled.div`
-	color: #7d4cdb;
-	font-weight: bold;
 	background-color: #f4f4f4;
 	width: 550px;
 	height: 70%;
@@ -48,17 +48,18 @@ const Label = styled.div`
 	width: 300px;
 `;
 
-class Signin extends Component {
+class Signup extends Component {
 	state = {
 		login: "",
 		password: ""
 	};
 
 	verifyUser = async () => {
+		const { password, login } = this.state;
 		const { data } = await Api.post("actionrequest.php", {
 			restType: "validUser",
-			username: "China",
-			password: 111111
+			username: password,
+			password: login
 		});
 
 		console.log(data);
@@ -69,14 +70,16 @@ class Signin extends Component {
 			<Container>
 				<Box>
 					<Logo variant="outline" alignItems="center" />
-					<InputLabel>
-						<span>Login</span>
-						<Input />
-					</InputLabel>
-					<InputLabel>
-						<span>Senha</span>
-						<Input />
-					</InputLabel>
+					<div>
+						<InputLabel>
+							<span>Login</span>
+							<Input />
+						</InputLabel>
+						<InputLabel>
+							<span>Senha</span>
+							<Input />
+						</InputLabel>
+					</div>
 					<ButtonLabel>
 						<Button
 							style={{
@@ -100,4 +103,4 @@ class Signin extends Component {
 	}
 }
 
-export default Signin;
+export default Signup;

@@ -6,6 +6,7 @@ import Header from "./Components/Header";
 
 import Home from "./Routes/Home";
 import Signin from "./Routes/Signin";
+import Signup from "./Routes/Signup";
 
 class App extends Component {
   teste = async () => {
@@ -26,6 +27,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/home' component={Home} />
           <Route path='/signin' component={Signin} />
+          <Route path='/signup' component={Signup} />
         </Switch>
       </div >
     );
