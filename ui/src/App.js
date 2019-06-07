@@ -1,34 +1,67 @@
 import React, { Component } from 'react';
-// import Api from "./Utils/Api";
+import styled from "styled-components";
 import { Switch, Route, withRouter } from 'react-router-dom';
 
-import Header from "./Components/Header";
+import Header from "./Components/Workspace/Header";
+import Wave from "./Components/Wave/Wave";
 
 import Home from "./Routes/Home";
 import Signin from "./Routes/Signin";
 import Signup from "./Routes/Signup";
+import Ranking from "./Routes/RankingList";
+
+const Footer = styled.div`
+  height: 300px;
+  background: #7d4cdb;
+`;
 
 class App extends Component {
+  state = {
+    open: false,
+    component: null
+  }
+
   teste = async () => {
     // const a = await Api.get("/teste2.php");
+  }
+
+  handleOpen = (component, movie) => () => {
+    this.setState({
+      open: true,
+      movie,
+      component
+    })
+  }
+
+  handleClose = () => () => {
+    this.setState({
+      open: false,
+      movie: null,
+      component: null
+    })
   }
 
   render() {
     const { pathname } = this.props.location;
     const isSign = pathname.match(/\/sign/);
+    const { open, movie, component } = this.state;
 
     return (
-      <div style={{ padding: !isSign ? "0 140px" : 0, height: "100%", width: "100%" }}>
+      <div style={{ height: isSign ? "inherit" : "fit-content" }} id="main">
         {
           isSign
             ? null
-            : <Header />
+            : <Header handleOpen={this.handleOpen} handleClose={this.handleClose} />
         }
+
+        <Wave open={open} handleClose={this.handleClose} data={movie} component={component} />
         <Switch>
-          <Route exact path='/home' component={Home} />
+          <Route exact path='/home' render={() => <Home open={open} handleOpen={this.handleOpen} />} />
+          <Route path='/ranking' render={() => <Ranking open={open} handleOpen={this.handleOpen} />} />
           <Route path='/signin' component={Signin} />
           <Route path='/signup' component={Signup} />
         </Switch>
+        <Footer></Footer>
       </div >
     );
   }

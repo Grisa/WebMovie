@@ -4,6 +4,7 @@ import { Button } from "semantic-ui-react";
 
 import {
 	uninitialized,
+	initialized,
 	success,
 	failed,
 	warning,
@@ -13,7 +14,7 @@ import {
 	FAILED,
 	WARNING,
 	LOADING
-} from "../../Utils/Constants";
+} from "../../../Utils/Constants";
 
 const ButtonGroup = styled.div`
 	display: flex;
@@ -54,6 +55,8 @@ class StepButton extends Component {
 			case LOADING:
 			default:
 				return uninitialized.icon;
+			case INITIALIZED:
+				return initialized.icon;
 			case SUCCESS:
 				return success.icon;
 			case FAILED:

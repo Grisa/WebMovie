@@ -1,5 +1,10 @@
 export const uninitialized = {
     color: "#CCCCCC",
+    icon: "angle double right"
+};
+
+export const initialized = {
+    color: "#CCCCCC",
     icon: "angle right"
 };
 

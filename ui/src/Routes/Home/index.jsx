@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Image } from "semantic-ui-react";
+
+import LaneMovie from "../../Components/Lanes/LaneMovie";
 
 const Container = styled.div`
 	border: 0 solid #444;
@@ -8,24 +9,14 @@ const Container = styled.div`
 	color: #7d4cdb;
 	font-size: 25px;
 	font-weight: bold;
+	height: fit-content;
+	width: 100%;
+	grid-column: 2;
 `;
 
-const Lane = styled.div`
-	margin-bottom: 30px;
-`;
-
-const Line = styled.div`
-	border-bottom: 5px solid #7d4cdb;
-	margin: 10px 0;
-`;
-
-const Inline = styled.div`
-	display: -webkit-box;
-	overflow: auto;
-`;
-
-const ImageContainer = styled.div`
-	margin-right: 10px;
+const Grid = styled.div`
+	display: grid;
+	grid-template-columns: 1fr 13fr 1fr;
 `;
 
 const filmes = [
@@ -66,41 +57,14 @@ const filmes = [
 class Home extends Component {
 	render() {
 		return (
-			<Container>
-				<Lane>
-					<span>Filmes</span>
-					<Line />
-					<Inline>
-						{filmes.map((filme, index) => (
-							<ImageContainer key={index}>
-								<Image src={filme.image} size="medium" />
-							</ImageContainer>
-						))}
-					</Inline>
-				</Lane>
-				<Lane>
-					<span>Séries</span>
-					<Line />
-					<Inline>
-						{filmes.map((filme, index) => (
-							<ImageContainer key={index}>
-								<Image src={filme.image} size="medium" />
-							</ImageContainer>
-						))}
-					</Inline>
-				</Lane>
-				<Lane>
-					<span>Animes</span>
-					<Line />
-					<Inline>
-						{filmes.map((filme, index) => (
-							<ImageContainer key={index}>
-								<Image src={filme.image} size="medium" />
-							</ImageContainer>
-						))}
-					</Inline>
-				</Lane>
-			</Container>
+			<Grid>
+				<Container>
+					<LaneMovie title="Filmes" movies={filmes} {...this.props} />
+					<LaneMovie title="Séries" movies={filmes} {...this.props} />
+					<LaneMovie title="Animes" movies={filmes} {...this.props} />
+					<div />
+				</Container>
+			</Grid>
 		);
 	}
 }

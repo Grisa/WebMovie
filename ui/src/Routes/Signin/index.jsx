@@ -3,9 +3,9 @@ import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { Input, Button } from "semantic-ui-react";
 
-import Logo from "../../Components/Logo";
+import Logo from "../../Components/Generic/Logo";
 
-import Api from "../../Services/Api";
+import Api from "../../Utils/Api";
 
 const Container = styled.div`
 	background-color: #7d4cdb;

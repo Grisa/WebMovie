@@ -26,7 +26,8 @@ const Logo = ({ variant = "text", alignItems = "center" }) => {
 			display: "flex",
 			justifyContent: alignItems,
 			width: "100px",
-			height: "50px"
+			height: "50px",
+			gridColumn: 2
 		},
 		variant === "text" ? text : outline
 	);

@@ -12,11 +12,11 @@ import {
 	LOADING
 } from "../../Utils/Constants";
 
-import Logo from "../../Components/Logo";
+import Logo from "../../Components/Generic/Logo";
 
 import Api from "../../Utils/Api";
 
-import StepButton from "../../Components/StepButton";
+import StepButton from "../../Components/Generic/StepButton";
 
 const Container = styled.div`
 	color: #7d4cdb;
