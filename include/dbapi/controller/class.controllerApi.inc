@@ -29,11 +29,11 @@ class ControllerApi
      * @param $yold     -> idade do usuario
      * @return Objeto JSON de resposta
      */
-    public function createNewUser($username, $password, $yold)
+    public function createNewUser($username, $displayName, $password, $yold, $mail)
     {
         $existQuery = "
             MATCH (p:User)
-            WHERE p.username = '{$username}'
+            WHERE p.name = '{$username}'
             RETURN p
         ";
 
@@ -43,10 +43,10 @@ class ControllerApi
 
         // Caso nao esteja vazia a consulta, retorna um erro.
         if (!empty($records)) {
-            return '{success:false}';
+            return '{success:Usuario ja existente}';
         }
 
-        $createString = "CREATE (a:User {name: '{$username}', username: '{$username}', password: '{$password}', yold: {$yold}})";
+        $createString = "CREATE (a:User {name: '{$username}', email:'{$mail}',  displayName: '{$displayName}', password: '{$password}', yold: {$yold}})";
 
         $this->conn->Execute($createString);
 
@@ -61,7 +61,7 @@ class ControllerApi
      * @param $duration  -> Duracao do filme
      * @return Objeto JSON de resposta
      */
-    public function createNewMovie($movieName, $dsMovie, $date, $duration)
+    public function createNewMovie($movieName, $dsMovie, $date, $duration, $type)
     {
         $existQuery = "
             MATCH (p:Movie)
@@ -78,7 +78,7 @@ class ControllerApi
             return '{success:false}';
         }
 
-        $createString = "CREATE (a:Movie {name: '{$movieName}', dsMovie: '{$dsMovie}', date: '{$date}', vlduration: {$duration}})";
+        $createString = "CREATE (a:Movie {name: '{$movieName}', dsMovie: '{$dsMovie}', date: '{$date}', type: {$type}, vlduration: {$duration}})";
 
         $this->conn->Execute($createString);
 
@@ -145,16 +145,19 @@ class ControllerApi
     }
 
     /**
-     * Gera o relacionamento do genero com o filme
-     * @param $genreId -> Identificador do genero
-     * @param $movieId -> Identificador do filme
-     * @return Object JSON de resposta
+     * Gera um relacionamento entre dois diferentes nos
+     * @param uniqueIdLeft  -> identificador unico do no da esquerda
+     * @param uniqueIdRight -> identificador unico do no da direita
+     * @param leftObject    -> Tipo do no da esquerda
+     * @param rightObject   -> Tipo do no da direita 
+     * @param linkName      -> Nome do relacionamento
+     * @return Objecto JSON de resposta
      */
-    public function createGenreRelation($genreId, $movieId)
+    public function createLink($uniqueIdLeft, $uniqueIdRight, $leftObject, $rightObject, $linkName)
     {
         $validLink = "
-            MATCH (a:Genre)-[:DEFINE]->(b:Movie)
-            WHERE a.name = '{$genreId}' AND b.name = '{$movieId}'
+            MATCH (a:{$leftObject})-[:{$linkName}]->(b:{$rightObject})
+            WHERE a.name = '{$uniqueIdLeft}' AND b.name = '{$uniqueIdRight}'
             RETURN b
         ";
 
@@ -167,19 +170,19 @@ class ControllerApi
         }
 
         if (!empty($record)) {
-            return "{success:false, msg:'Filme ja possui este genero relacionado'}";
+            return "{success:false, msg:'Relacionamento ja existente'}";
         }
 
         $linkString = "
-            MATCH (a:Genre), (b:Movie)
-            WHERE a.name = '{$genreId}' AND b.name = '{$movieId}'
-            CREATE (a)-[:DEFINE]->(b)
-            RETURN a        
+            MATCH (a:{$leftObject}), (b:{$rightObject})
+            WHERE a.name = '{$uniqueIdLeft}' AND b.name = '{$uniqueIdRight}'
+            CREATE (a)-[:{$linkName}]->(b)
+            RETURN a
         ";
 
         $this->conn->Execute($linkString);
 
-        return '{success: true}';
+        return '{success: true}';        
     }
 }
 ?>
