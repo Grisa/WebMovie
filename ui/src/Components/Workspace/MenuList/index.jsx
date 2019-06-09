@@ -1,6 +1,13 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { Dropdown, Input } from "semantic-ui-react";
 import SearchWave from "../../Wave/SearchWave";
+
+const options = [
+	{ key: "1", text: "Home", value: "/home" },
+	{ key: "2", text: "Ranking", value: "/ranking" },
+	{ key: "3", text: "Minha lista", value: "/mylist" }
+];
 
 class MenuList extends Component {
 	advancedHandleClose = () => {
@@ -21,8 +28,12 @@ class MenuList extends Component {
 		searchInput.focus();
 	};
 
+	goto = route => () => {
+		this.props.history.push(route);
+	};
+
 	render() {
-		const { options, midia } = this.props;
+		const { midia } = this.props;
 
 		return (
 			<div
@@ -37,10 +48,18 @@ class MenuList extends Component {
 					floating
 					labeled
 					icon="th list"
-					options={options}
 					text="Menu"
-					style={{ backgroundColor: "#7D4CDB", color: "#f4f4f4" }}
-				/>
+					style={{ backgroundColor: "#7D4CDB", color: "#f4f4f4" }}>
+					<Dropdown.Menu>
+						{options.map(option => (
+							<Dropdown.Item
+								key={option.key}
+								{...option}
+								onClick={this.goto(option.value)}
+							/>
+						))}
+					</Dropdown.Menu>
+				</Dropdown>
 				<Input
 					label={
 						<Dropdown
@@ -63,4 +82,4 @@ class MenuList extends Component {
 	}
 }
 
-export default MenuList;
+export default withRouter(MenuList);

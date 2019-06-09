@@ -7,12 +7,6 @@ import MenuList from "../MenuList";
 import Signin from "../Signin";
 import Signup from "../Signup";
 
-const options = [
-	{ key: "1", text: "Exibir mídias", value: "1" },
-	{ key: "2", text: "Ranking", value: "2" },
-	{ key: "3", text: "Minha lista", value: "3" }
-];
-
 const midia = [
 	{ key: "1", text: "Filmes", value: "1" },
 	{ key: "2", text: "Séries", value: "2" },
@@ -35,7 +29,7 @@ class Header extends Component {
 		return (
 			<Grid>
 				<Logo />
-				<MenuList options={options} midia={midia} {...props} />
+				<MenuList midia={midia} {...props} />
 				<Signin />
 				<Signup />
 			</Grid>
