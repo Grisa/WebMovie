@@ -25,22 +25,15 @@ const Container = styled.div`
 
 class PoolMovie extends Component {
 	render() {
-		const { title } = this.props;
+		const { title, handleOpen, list } = this.props;
 
 		return (
 			<Pool>
 				<Title>{title}</Title>
 				<Container>
-					<PoolCard title="Teste 1" />
-					<PoolCard title="Teste 2" />
-					<PoolCard title="Teste 3" />
-					<PoolCard title="Teste 4" />
-					<PoolCard title="Teste 5" />
-					<PoolCard title="Teste 6" />
-					<PoolCard title="Teste 7" />
-					<PoolCard title="Teste 8" />
-					<PoolCard title="Teste 6" />
-					<PoolCard title="Teste 10" />
+					{list.map((item, index) => (
+						<PoolCard key={index} handleOpen={handleOpen} {...item} />
+					))}
 				</Container>
 			</Pool>
 		);

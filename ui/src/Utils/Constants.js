@@ -29,3 +29,10 @@ export const SUCCESS = 3;
 export const FAILED = 4;
 export const WARNING = 5;
 export const LOADING = 6;
+
+export const LIKED = 1;
+export const UNLIKED = 2;
+export const NOT_RATED = 3;
+
+export const FAVORITED = 1;
+export const UNFAVORITED = 2;

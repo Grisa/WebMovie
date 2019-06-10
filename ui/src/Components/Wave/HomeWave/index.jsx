@@ -31,8 +31,8 @@ class HomeWave extends Component {
 					onClick={handleClose()}
 				/>
 				<Card style={{ gridColumn: 2, gridRow: 2 }} fluid>
-					<Card.Header>{data.name}</Card.Header>
-					<Card.Content>{data.name}</Card.Content>
+					<Card.Header>{data.title}</Card.Header>
+					<Card.Content>{data.description}</Card.Content>
 				</Card>
 			</Container>
 		);

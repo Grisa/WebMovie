@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import { Button, Card, Icon, Image, Label } from "semantic-ui-react";
+import { Button, Card, Image } from "semantic-ui-react";
+
+import HomeWave from "../../Wave/HomeWave";
+import RateButton from "../../Generic/RateButton";
 
 const Container = styled.div`
 	margin: 10px;
@@ -18,13 +21,26 @@ const Info = styled.div`
 	grid-template-rows: 1fr 4fr 1fr;
 `;
 
-const Likes = styled.div`
+const OptionContainer = styled.div`
 	align-self: end;
 `;
 
 class PoolCard extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			title: props.title,
+			description: props.description,
+			likes: props.likes,
+			like: props.like,
+			favorite: props.favorite
+		};
+	}
+
 	render() {
-		const { title } = this.props;
+		const { handleOpen } = this.props;
+		const { title, description, likes, like, favorite } = this.state;
 
 		return (
 			<Container>
@@ -33,13 +49,11 @@ class PoolCard extends Component {
 						<Grid>
 							<Info>
 								<Card.Header>{title}</Card.Header>
-								<Card.Meta>Descrição do filme </Card.Meta>
-								<Likes>
-									<Label>
-										<Icon name="star" />
-										21351351 likes
-									</Label>
-								</Likes>
+								<Card.Meta>{description}</Card.Meta>
+								<OptionContainer>
+									<RateButton status={like} type="like" value={likes} />
+									<RateButton status={favorite} type="favorite" />
+								</OptionContainer>
 							</Info>
 							<div>
 								<Image
@@ -51,7 +65,10 @@ class PoolCard extends Component {
 						</Grid>
 					</Card.Content>
 					<Card.Content>
-						<Button basic compact>
+						<Button
+							basic
+							compact
+							onClick={handleOpen(HomeWave, { ...this.state })}>
 							Visualizar
 						</Button>
 					</Card.Content>
