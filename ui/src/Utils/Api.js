@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const Api = axios.create({
-    baseURL: "http://localhost/WebMovie/include/request/"
+    baseURL: "http://localhost:3333/"
 });
 
 // Api.interceptors.request.use(async config => {

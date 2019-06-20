@@ -84,19 +84,18 @@ class Signin extends Component {
 	};
 
 	verifyUser = async () => {
-		const { password, login } = this.state;
-
 		if (!this.validateField()) {
 			return;
 		}
 
-		await Api.get("actionrequest.php", {
-			params: {
-				restType: "validUser",
-				username: password,
-				password: login
-			}
-		});
+		try {
+			await Api.post("user/validate", {
+				...this.state
+			});
+		} catch (e) {
+			console.warn(e);
+			return false;
+		}
 
 		// Fazer o login do usuário aqui
 		console.log(1);
