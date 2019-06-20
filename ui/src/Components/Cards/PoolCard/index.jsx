@@ -32,6 +32,10 @@ class PoolCard extends Component {
 		this.state = {
 			title: props.title,
 			description: props.description,
+			genry: props.genry,
+			date: props.date,
+			duration: props.duration,
+			comments: props.comments,
 			likes: props.likes,
 			like: props.like,
 			favorite: props.favorite

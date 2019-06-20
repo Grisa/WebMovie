@@ -2,15 +2,28 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Button, Card } from "semantic-ui-react";
 
+import Comment from "./Comment";
+import MovieData from "./MovieData";
+
 const Container = styled.div`
 	height: inherit;
 	width: 100%;
 	z-index: 9999999;
 	position: absolute;
 	display: grid;
-	grid-template-columns: 1fr 7fr 4fr 1fr 1fr 1fr;
-	grid-template-rows: 0.5fr 1fr 13fr;
+	grid-template-columns: 1fr 7fr 6fr 0.25fr 0.25fr 1fr;
+	grid-template-rows: 0.25fr 4fr 5fr 5fr;
 `;
+
+/**
+ * Nome
+ * Descrição
+ * Genero
+ * Data
+ * Duração
+ * Comentários
+ * Like/Fav
+ */
 
 class HomeWave extends Component {
 	render() {
@@ -30,10 +43,18 @@ class HomeWave extends Component {
 					icon="x"
 					onClick={handleClose()}
 				/>
-				<Card style={{ gridColumn: 2, gridRow: 2 }} fluid>
-					<Card.Header>{data.title}</Card.Header>
-					<Card.Content>{data.description}</Card.Content>
+				<MovieData data={data} />
+				<Card
+					style={{
+						gridColumn: 3,
+						gridRow: 2,
+						margin: "0 1em 1em 1em",
+						width: "calc(100% - 1em)"
+					}}
+					fluid>
+					<Card.Content>Alooooooo rapeize</Card.Content>
 				</Card>
+				<Comment />
 			</Container>
 		);
 	}

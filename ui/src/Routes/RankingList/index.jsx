@@ -28,6 +28,19 @@ const movie = [
 	{
 		title: "Filme 1",
 		description: "descrição do filme 1, é um filme com uma galerinha da pesada",
+		genry: "Terror",
+		date: new Date().getTime(),
+		duration: 60 * 60 * 2.5,
+		comments: [
+			{
+				author: 1,
+				comment: "ola"
+			},
+			{
+				author: 3,
+				comment: "ola 2"
+			}
+		],
 		likes: 215435,
 		like: NOT_RATED,
 		favorite: UNFAVORITED
@@ -35,6 +48,19 @@ const movie = [
 	{
 		title: "Filme 2",
 		description: "descrição do filme 2, é um filme com uma galerinha da pesada",
+		genry: "Terror",
+		date: new Date().getTime(),
+		duration: 60 * 60 * 2.5,
+		comments: [
+			{
+				author: 1,
+				comment: "ola"
+			},
+			{
+				author: 3,
+				comment: "ola 2"
+			}
+		],
 		likes: 115435,
 		like: LIKED,
 		favorite: UNFAVORITED

@@ -42,19 +42,19 @@ class RateButton extends Component {
 
 		return (
 			<Label color={this.getLikeStatus()}>
-				<Icon name="thumbs up" style={{ color: "#fafafa" }} />
+				<Icon name="star" style={{ color: "#fafafa" }} />
 				{value && `${value} likes`}
 			</Label>
 		);
 	};
 
 	renderFavorite = () => {
-		const { value, status } = this.props;
+		const { status } = this.props;
 
 		return (
 			<Label color={this.getFavStatus()}>
 				<Icon name="heart" style={{ color: "#fafafa" }} />
-				{status == FAVORITED ? "Gostou" : "Não gostou"}
+				{status === FAVORITED ? "Favoritou" : "Não favoritou"}
 			</Label>
 		);
 	};
