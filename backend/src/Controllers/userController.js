@@ -1,46 +1,41 @@
 const User = require("../Models/UserModel");
-const crypto = require('crypto')
 
 module.exports = {
+	async authenticate(req, res) {
+		try {
+			const { password, login } = req.body;
+			const user = await User.findOne({ login });
 
-	async validUser(req, res) {
-		
-		const {password, login} = req.body;
+			if (!user) {
+				return res.status(400).json({ error: "Usuario nao existe" });
+			}
 
-		var hash = crypto.createHash('md5').update(password).digest("hex");
+			if (!(await user.compareHash(password))) {
+				return res.status(400).json({ error: "Usuario ou senha incorretos" });
+			}
 
-		const cur = await User.findOne({login: login});
-
-		if (cur === null) {
-			return res.status(501).send("Usuario nao existe");
+			return res.status(200).json({
+				user,
+				token: user.generateToken()
+			});
+		} catch (e) {
+			return res.status(400).json({ error: "Ocorreu um erro" });
 		}
-
-		if (cur.login === login && cur.password === hash) {
-			return res.status(200).send('ok');
-		} else {
-			return res.status(502).send("Usuario ou senha incorretos");
-		}
-
-		return res.status(200).send('ok');
 	},
 
 	async createUser(req, res) {
+		const { login } = req.body;
 
-		const {name, password, email, login, idade, sobrenome} = req.body;
+		try {
+			if (await User.findOne({ login })) {
+				return res.status(400).json({ error: "Usuario ja existe" });
+			}
 
-		const cur = await User.findOne({login: login});
+			const user = await User.create(req.body);
 
-		var hash = crypto.createHash('md5').update(password).digest("hex");
-
-		if (cur !== null && cur.login === login) {
-			return res.status(500).send("Usuario ja existe");
+			return res.json({ user });
+		} catch (err) {
+			return res.status(400).json({ error: "Erro no cadastro" });
 		}
-	
-		User.create({ name: name, password: hash, email: email, login: login, idade: idade, sobrenome: sobrenome}, function (err, small) {
-			if (err) return handleError(err);
-		 	return res.status(200).send('ok');
-		});
-
-		return res.status(200).send('ok');
 	}
 }

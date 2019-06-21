@@ -10,7 +10,7 @@ const SignupContent = styled.button`
 	font-weight: bold;
 	border: 3px solid #7d4cdb;
 	border-radius: 35px;
-	width: 94px;
+	width: 100%;
 	padding: 5px 10px;
 	height: 100%;
 	line-height: 30px;

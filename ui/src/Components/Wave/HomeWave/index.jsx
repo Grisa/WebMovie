@@ -12,7 +12,7 @@ const Container = styled.div`
 	position: absolute;
 	display: grid;
 	grid-template-columns: 1fr 7fr 6fr 0.25fr 0.25fr 1fr;
-	grid-template-rows: 0.25fr 4fr 5fr 5fr;
+	grid-template-rows: 0.25fr 2fr 5fr 5fr;
 `;
 
 /**
