@@ -81,8 +81,16 @@ export default class MovieData extends Component {
 					}}>
 					<DescriptionContainer>{data.description}</DescriptionContainer>
 					<ToBottom>
-						<GenryContainer>{data.genry}</GenryContainer>
-						<div style={{}}>
+						<div>
+							<span style={{ fontSize: "13pt" }}>Gênero</span>
+							<GenryContainer>{data.genry}</GenryContainer>
+						</div>
+						<div
+							style={{
+								display: "flex",
+								flexDirection: "column",
+								justifyContent: "flex-end"
+							}}>
 							<DateContainer>
 								<Icon name="calendar alternate" />
 								Data de lançamento: {this.returnDate(data.date)}

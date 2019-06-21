@@ -10,6 +10,7 @@ const Container = styled.div`
 	width: 100%;
 	z-index: 9999999;
 	position: absolute;
+	animation-delay: 3s;
 	display: grid;
 	grid-template-columns: 1fr 7fr 6fr 0.25fr 0.25fr 1fr;
 	grid-template-rows: 0.25fr 2fr 5fr 5fr;
@@ -54,7 +55,7 @@ class HomeWave extends Component {
 					fluid>
 					<Card.Content>Alooooooo rapeize</Card.Content>
 				</Card>
-				<Comment />
+				<Comment comments={data.comments} />
 			</Container>
 		);
 	}

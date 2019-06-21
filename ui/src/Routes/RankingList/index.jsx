@@ -33,11 +33,13 @@ const movie = [
 		duration: 60 * 60 * 2.5,
 		comments: [
 			{
-				author: 1,
+				author: "Ramiro",
+				time: 1563728203000,
 				comment: "ola"
 			},
 			{
-				author: 3,
+				author: "Benjamin",
+				time: 1563730278000,
 				comment: "ola 2"
 			}
 		],
@@ -53,11 +55,11 @@ const movie = [
 		duration: 60 * 60 * 2.5,
 		comments: [
 			{
-				author: 1,
+				author: "Ramiro",
 				comment: "ola"
 			},
 			{
-				author: 3,
+				author: "Benjamin",
 				comment: "ola 2"
 			}
 		],
