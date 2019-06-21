@@ -4,9 +4,9 @@ module.exports = {
 
 	async createMovie(req, res) {
 		console.log(req.body);
-		const {name} = req.body;
+		const { name } = req.body;
 
-		const movie = await Movie.findOne({name});
+		const movie = await Movie.findOne({ name });
 
 		if (movie !== null) {
 			console.log('aqui')
@@ -14,7 +14,7 @@ module.exports = {
 		}
 
 		Movie.create(req.body, function (err, small) {
-		 	return res.status(200).send('ok');
+			return res.status(200).send('ok');
 		});
 
 		return res.status(200).send('ok');
@@ -22,19 +22,17 @@ module.exports = {
 
 	async deleteMovie(req, res) {
 
-		const {name} = req.body;
+		const { name } = req.body;
 
-		const movie = await Movie.findOne({name: name});
+		const movie = await Movie.find();
 
 		if (movie === null) {
 			return res.status(404).send("Filme não existente");
 		}
 
-		Movie.deleteOne({name: name}, function (err) {
-			return res.status(200).send('ok');
-		});
+		const data = await Movie.deleteMany(null);
 
-		return res.status(200).send('ok');
+		return res.status(200).json({ a: data });
 	},
 
 	async getAllMovies(req, res) {
@@ -50,16 +48,16 @@ module.exports = {
 		return res.status(200).send(movie);
 	},
 
-	async getMovieByGenre (req, res) {
+	async getMovieByGenre(req, res) {
+		const movies = await Movie.find({ type: req.params.type });
 
-		const movie = await Movie.find(res.body);
+		console.log(movies)
 
-		if (movie !== null) {
-			return res.status(404).send("Nao existem filmes deste genero");
+		if (movies.length > 0) {
+			return res.status(200).send(movies);
 		}
 
-		return res.status(200).send(movie);
-
+		return res.status(404).send("Nao existem filmes deste genero");
 	}
 
 }

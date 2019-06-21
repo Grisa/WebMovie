@@ -1,7 +1,6 @@
 const User = require("../Models/UserModel");
 
 module.exports = {
-
 	async authenticate(req, res) {
 		try {
 			const { password, login } = req.body;

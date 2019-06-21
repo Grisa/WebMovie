@@ -9,7 +9,7 @@ routes.post('/user/create', userController.createUser);
 routes.post('/movie/create', movieController.createMovie);
 routes.post('/movie/delete', movieController.deleteMovie);
 routes.post('/movie/getall', movieController.getAllMovies);
-routes.post('/movie/getbygenre', movieController.getMovieByGenre);
+routes.post('/movie/getbygenre/:type', movieController.getMovieByGenre);
 const authMiddleware = require("./Middlewares/auth");
 
 routes.use(authMiddleware);
