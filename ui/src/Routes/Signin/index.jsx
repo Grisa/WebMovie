@@ -83,25 +83,25 @@ class Signin extends Component {
 		return isOkay;
 	};
 
-	verifyUser = async () => {
-		const { password, login } = this.state;
-
+	authenticate = async () => {
 		if (!this.validateField()) {
 			return;
 		}
 
-		await Api.get("actionrequest.php", {
-			params: {
-				restType: "validUser",
-				username: password,
-				password: login
+		try {
+			const { data } = await Api.post("user/authenticate", {
+				...this.state
+			});
+
+			// Fazer o login do usuário aqui
+			if (data.token) {
+				localStorage.setItem("token", data.token);
 			}
-		});
 
-		// Fazer o login do usuário aqui
-		console.log(1);
-
-		this.goto("/home")();
+			this.goto("/home")();
+		} catch (e) {
+			console.warn(e);
+		}
 	};
 
 	goto = route => () => {
@@ -130,7 +130,7 @@ class Signin extends Component {
 								color: "#f4f4f4",
 								width: "130px"
 							}}
-							onClick={this.verifyUser}>
+							onClick={this.authenticate}>
 							SUBMIT
 						</Button>
 						<span onClick={this.goto("/signup")}>Não possui conta?</span>

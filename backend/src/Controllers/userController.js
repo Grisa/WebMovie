@@ -1,38 +1,42 @@
 const User = require("../Models/UserModel");
-const crypto = require('crypto')
 
 module.exports = {
 
-	async validUser(req, res) {
-		const { password, login } = req.body;
-		const hash = crypto.createHash('md5').update(password).digest("hex");
-		const user = await User.findOne({login});
+	async authenticate(req, res) {
+		try {
+			const { password, login } = req.body;
+			const user = await User.findOne({ login });
 
-		if (user === null) {
-			return res.status(404).send("Usuario nao existe");
+			if (!user) {
+				return res.status(400).json({ error: "Usuario nao existe" });
+			}
+
+			if (!(await user.compareHash(password))) {
+				return res.status(400).json({ error: "Usuario ou senha incorretos" });
+			}
+
+			return res.status(200).json({
+				user,
+				token: user.generateToken()
+			});
+		} catch (e) {
+			return res.status(400).json({ error: "Ocorreu um erro" });
 		}
-
-		if (user.login === login && user.password === hash) {
-			return res.status(200).send('ok');
-		}
-
-		return res.status(401).send("Usuario ou senha incorretos");
 	},
 
 	async createUser(req, res) {
-		const { password, login } = req.body;
-		const user = await User.findOne({login});
-		const hash = crypto.createHash('md5').update(password).digest("hex");
+		const { login } = req.body;
 
-		if (user !== null) {
-			return res.status(404).send("Usuario ja existe");
+		try {
+			if (await User.findOne({ login })) {
+				return res.status(400).json({ error: "Usuario ja existe" });
+			}
+
+			const user = await User.create(req.body);
+
+			return res.json({ user });
+		} catch (err) {
+			return res.status(400).json({ error: "Erro no cadastro" });
 		}
-
-		User.create({...req.body, password: hash}, function (err, small) {
-			if (err) return handleError(err);
-		 	return res.status(200).send('ok');
-		});
-
-		return res.status(200).send('ok');
 	}
 }

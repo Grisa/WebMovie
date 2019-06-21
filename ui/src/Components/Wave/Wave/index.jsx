@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const ColorBG = styled.div`
 	background-color: #7d4cdb;
-	-webkit-transition: all 500ms ease-in-out;
+	-webkit-transition: height 500ms ease-in-out;
 	height: 0px;
 	width: 100%;
 	z-index: 9999999;
@@ -13,7 +13,7 @@ const ColorBG = styled.div`
 class Wave extends Component {
 	render() {
 		const { open, component } = this.props;
-		const style = { height: "1400px" };
+		const style = { height: "100vmax" };
 		const WaveRender = component;
 
 		return (
