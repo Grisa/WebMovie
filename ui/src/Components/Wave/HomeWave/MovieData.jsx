@@ -64,10 +64,9 @@ export default class MovieData extends Component {
 		return (
 			<Card
 				style={{
-					gridColumn: 2,
-					gridRow: 2,
 					margin: "0 1em 1em 1em",
-					width: "calc(100% - 1em)"
+					width: "calc(100% - 1em)",
+					gridArea: "2 / 2 / 10 / 8"
 				}}
 				fluid>
 				<CardHeader>

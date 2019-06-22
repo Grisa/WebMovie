@@ -32,13 +32,6 @@ const Title = styled.span`
 	font-size: 24px;
 `;
 
-const Container = styled.div`
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	height: 100%;
-`;
-
 const Box = styled.div`
 	background: #7519c1;
 	width: calc(25% - 10px);
@@ -50,6 +43,7 @@ const Box = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	min-width: 120px;
 `;
 
 const ScorePosition = styled.div`
@@ -201,22 +195,25 @@ export default class Evaluation extends Component {
 		return (
 			<Card
 				style={{
-					gridColumn: 3,
-					gridRow: 2,
 					margin: "0 1em 1em 1em",
-					width: "calc(100% - 1em)"
+					width: "calc(100% - 1em)",
+					gridArea: "2 / 8 / 10 / 15"
 				}}
 				fluid>
 				<CardHeader>
 					<Title>Avaliações</Title>
 				</CardHeader>
-				<Card.Content>
-					<Container>
-						{this.renderRanking()}
-						{this.renderApproval()}
-						{this.renderRate()}
-						{this.renderFav()}
-					</Container>
+				<Card.Content
+					style={{
+						display: "flex",
+						flexWrap: "wrap",
+						justifyContent: "space-between",
+						height: "calc(100% - 51px)"
+					}}>
+					{this.renderRanking()}
+					{this.renderApproval()}
+					{this.renderRate()}
+					{this.renderFav()}
 				</Card.Content>
 			</Card>
 		);

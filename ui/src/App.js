@@ -9,20 +9,23 @@ import Home from "./Routes/Home";
 import Signin from "./Routes/Signin";
 import Signup from "./Routes/Signup";
 import Ranking from "./Routes/RankingList";
+import MyList from "./Routes/MyList";
 
 const Footer = styled.div`
   height: 300px;
   background: #7d4cdb;
 `;
 
+const NoMatch = () => {
+  return (<div>
+    Nenhum resultado encontrado
+  </div>);
+}
+
 class App extends Component {
   state = {
     open: false,
     component: null
-  }
-
-  teste = async () => {
-    // const a = await Api.get("/teste2.php");
   }
 
   handleOpen = (component, movie) => () => {
@@ -58,8 +61,10 @@ class App extends Component {
         <Switch>
           <Route exact path='/home' render={() => <Home open={open} handleOpen={this.handleOpen} />} />
           <Route path='/ranking' render={() => <Ranking open={open} handleOpen={this.handleOpen} />} />
+          <Route path='/mylist' render={() => <MyList open={open} handleOpen={this.handleOpen} />} />
           <Route path='/signin' component={Signin} />
           <Route path='/signup' component={Signup} />
+          <Route component={NoMatch} />
         </Switch>
         <Footer></Footer>
       </div >

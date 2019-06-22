@@ -111,12 +111,11 @@ export default class Comment extends Component {
 		return (
 			<Card
 				style={{
-					gridColumn: 2,
-					gridRow: 3,
 					margin: "0 1em 1em 1em",
 					width: "calc(100% - 1em)",
 					height: "fit-content",
-					maxHeight: "700px"
+					maxHeight: "700px",
+					gridArea: "10 / 2 / 16 / 15"
 				}}
 				fluid>
 				<CardHeader>

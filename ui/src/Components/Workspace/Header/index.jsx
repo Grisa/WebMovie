@@ -16,7 +16,7 @@ const midia = [
 
 const Grid = styled.div`
 	display: grid;
-	grid-template-columns: 1fr 1fr 10fr 1fr 1fr 1fr;
+	grid-template-columns: repeat(16, 1fr);
 	grid-template-rows: 1fr;
 	padding: 20px 0;
 	z-index: 9999999999;

@@ -45,7 +45,8 @@ class MenuList extends Component {
 				style={{
 					display: "flex",
 					justifyContent: "center",
-					alignItems: "center"
+					alignItems: "center",
+					gridColumn: "5 / 12"
 				}}>
 				<Dropdown
 					button

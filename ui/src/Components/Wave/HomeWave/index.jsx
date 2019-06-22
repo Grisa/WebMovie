@@ -7,14 +7,15 @@ import MovieData from "./MovieData";
 import Evaluation from "./Evaluation";
 
 const Container = styled.div`
-	height: inherit;
+	height: 100vmax;
 	width: 100%;
 	z-index: 9999999;
 	position: absolute;
 	animation-delay: 3s;
 	display: grid;
-	grid-template-columns: 1fr 7fr 6fr 0.25fr 0.25fr 1fr;
-	grid-template-rows: 0.25fr 2fr 5fr 5fr;
+	overflow: hidden;
+	grid-template-columns: repeat(16, 1fr);
+	grid-template-rows: repeat(32, 50px);
 `;
 
 /**
@@ -35,11 +36,11 @@ class HomeWave extends Component {
 			<Container>
 				<Button
 					style={{
-						gridColumn: 5,
-						gridRow: 2,
 						borderRadius: "15em",
 						height: "50px",
-						width: "50px"
+						width: "50px",
+						gridArea: "2 / 15 / auto / auto",
+						justifySelf: "end"
 					}}
 					circular
 					icon="x"

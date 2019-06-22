@@ -8,6 +8,7 @@ const ColorBG = styled.div`
 	width: 100%;
 	z-index: 9999999;
 	position: absolute;
+	overflow: hidden;
 `;
 
 class Wave extends Component {

@@ -11,10 +11,11 @@ const SigninContent = styled.h1`
 	padding: 8px 10px;
 	height: 100%;
 	line-height: 30px;
+	grid-column: 14 / 15;
 `;
 
 const Signin = () => (
-	<Link to="/signin">
+	<Link to="/signin" style={{ gridColumn: "14 / 15" }}>
 		<SigninContent>Sign in</SigninContent>
 	</Link>
 );

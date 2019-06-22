@@ -14,9 +14,10 @@ const SignupContent = styled.button`
 	padding: 5px 10px;
 	height: 100%;
 	line-height: 30px;
+	grid-column: 15/ 16;
 `;
 const Signup = () => (
-	<Link to="/signup">
+	<Link to="/signup" style={{ gridColumn: "15 / 16" }}>
 		<SignupContent>Sign up</SignupContent>
 	</Link>
 );

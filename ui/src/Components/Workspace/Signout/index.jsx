@@ -14,7 +14,7 @@ const SignoutContent = styled.button`
 	padding: 5px 10px;
 	height: 100%;
 	line-height: 30px;
-	grid-column: 5;
+	grid-column: 15 / 16;
 `;
 
 const Signout = ({ history }) => (
