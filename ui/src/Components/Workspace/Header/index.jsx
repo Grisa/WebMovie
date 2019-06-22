@@ -6,6 +6,7 @@ import Logo from "../../Generic/Logo";
 import MenuList from "../MenuList";
 import Signin from "../Signin";
 import Signup from "../Signup";
+import Signout from "../Signout";
 
 const midia = [
 	{ key: "1", text: "Filmes", value: "1" },
@@ -23,6 +24,19 @@ const Grid = styled.div`
 `;
 
 class Header extends Component {
+	isLogged() {
+		return !!localStorage.getItem("token");
+	}
+
+	renderButtonOff() {
+		return (
+			<React.Fragment>
+				<Signin />
+				<Signup />
+			</React.Fragment>
+		);
+	}
+
 	render() {
 		const props = this.props;
 
@@ -30,8 +44,7 @@ class Header extends Component {
 			<Grid>
 				<Logo />
 				<MenuList midia={midia} {...props} />
-				<Signin />
-				<Signup />
+				{!this.isLogged() ? this.renderButtonOff() : <Signout />}
 			</Grid>
 		);
 	}
