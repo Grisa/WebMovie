@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Button, Card } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 
 import Comment from "./Comment";
 import MovieData from "./MovieData";
+import Evaluation from "./Evaluation";
 
 const Container = styled.div`
 	height: inherit;
@@ -45,16 +46,7 @@ class HomeWave extends Component {
 					onClick={handleClose()}
 				/>
 				<MovieData data={data} />
-				<Card
-					style={{
-						gridColumn: 3,
-						gridRow: 2,
-						margin: "0 1em 1em 1em",
-						width: "calc(100% - 1em)"
-					}}
-					fluid>
-					<Card.Content>Alooooooo rapeize</Card.Content>
-				</Card>
+				<Evaluation />
 				<Comment comments={data.comments} />
 			</Container>
 		);

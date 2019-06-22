@@ -23,6 +23,11 @@ export const warning = {
     icon: "exclamation"
 };
 
+export const normal = {
+    color: "#7519c1",
+    icon: "x"
+};
+
 export const NOT_INITIALIZED = 1;
 export const INITIALIZED = 2;
 export const SUCCESS = 3;
