@@ -19,16 +19,10 @@ const FavoriteSchema = new mongoose.Schema({
 const MovieSchema = new mongoose.Schema({
     name: String,
     description: String,
-    genre: {
-        type: String,
-        enum: ["Terror", "Suspense", "Comédia", "Animação", "Ação"]
-    },
+    genre: String,
     duration: Number,
     data: Date,
-    type: {
-        type: Number,
-        enum: [1, 2, 3]
-    },
+    type: String,
     rating: RatingSchema,
     favorite: [FavoriteSchema]
 }, {
