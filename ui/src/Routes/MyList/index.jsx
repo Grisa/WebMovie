@@ -6,6 +6,7 @@ import ListCard from "../../Components/Cards/ListCard";
 const Container = styled.div`
 	display: grid;
 	grid-template-columns: repeat(16, 1fr);
+	min-height: calc(100vmin - 90px - 300px);
 `;
 
 const List = styled.div`
@@ -22,6 +23,15 @@ class MyList extends Component {
 		return (
 			<Container>
 				<List>
+					<ListCard />
+					<ListCard />
+					<ListCard />
+					<ListCard />
+					<ListCard />
+					<ListCard />
+					<ListCard />
+					<ListCard />
+					<ListCard />
 					<ListCard />
 					<ListCard />
 					<ListCard />
