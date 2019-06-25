@@ -42,7 +42,7 @@ class Header extends Component {
 
 		return (
 			<Grid>
-				<Logo />
+				<Logo handleClose={props.handleClose()} />
 				<MenuList midia={midia} {...props} />
 				{!this.isLogged() ? this.renderButtonOff() : <Signout />}
 			</Grid>

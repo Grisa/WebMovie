@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-
+import { FaCalendarAlt } from "react-icons/fa";
 import { Card, Icon } from "semantic-ui-react";
 
 const CardHeader = styled.div`
@@ -70,7 +70,7 @@ export default class MovieData extends Component {
 				}}
 				fluid>
 				<CardHeader>
-					<Title>{data.title}</Title>
+					<Title>{data.name}</Title>
 				</CardHeader>
 				<Card.Content
 					style={{
@@ -82,7 +82,7 @@ export default class MovieData extends Component {
 					<ToBottom>
 						<div>
 							<span style={{ fontSize: "13pt" }}>Gênero</span>
-							<GenryContainer>{data.genry}</GenryContainer>
+							<GenryContainer>{data.genre}</GenryContainer>
 						</div>
 						<div
 							style={{
@@ -91,8 +91,8 @@ export default class MovieData extends Component {
 								justifyContent: "flex-end"
 							}}>
 							<DateContainer>
-								<Icon name="calendar alternate" />
-								Data de lançamento: {this.returnDate(data.date)}
+								<FaCalendarAlt />
+								Data de lançamento: {this.returnDate(data.data)}
 							</DateContainer>
 							<DurationContainer>
 								<Icon name="clock" />

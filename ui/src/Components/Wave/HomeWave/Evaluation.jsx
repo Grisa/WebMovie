@@ -192,6 +192,7 @@ export default class Evaluation extends Component {
 	};
 
 	render() {
+		console.log(this.props);
 		return (
 			<Card
 				style={{

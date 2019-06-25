@@ -92,7 +92,7 @@ class Signup extends Component {
 	};
 
 	verifyUser = async () => {
-		const { login, password } = this.state;
+		const { login, password, email } = this.state;
 
 		this.setState({
 			step1: LOADING
@@ -102,24 +102,28 @@ class Signup extends Component {
 			return;
 		}
 
-		const { data } = await Api.get("actionrequest.php", {
-			params: {
-				restType: "validUser",
-				username: password,
-				password: login
-			}
-		});
+		try {
+			const response = await Api.post("user/validate", {
+				login,
+				password,
+				email
+			});
 
-		this.setState({
-			step1: SUCCESS,
-			step2: INITIALIZED
-		});
+			this.setState({
+				step1: SUCCESS,
+				step2: INITIALIZED
+			});
 
-		return data;
+			console.log(response);
+		} catch (e) {
+			this.setState({
+				step1: FAILED
+			});
+		}
 	};
 
 	createUser = async () => {
-		const { login, password, birthday } = this.state;
+		const { login, password, birthday, email, name, lastName } = this.state;
 
 		this.setState({
 			step2: LOADING
@@ -129,22 +133,39 @@ class Signup extends Component {
 			return;
 		}
 
-		await Api.get("actionrequest.php", {
-			params: {
-				restType: "createUser",
-				username: login,
-				password: password,
-				yold: birthday
+		try {
+			const { data } = await Api.post("user/create", {
+				login,
+				password,
+				email,
+				name,
+				sobrenome: lastName,
+				idade: birthday
+			});
+
+			if (data) {
+				console.log(data);
 			}
-		});
+			this.setState({
+				step2: SUCCESS
+			});
 
-		this.setState({
-			step2: SUCCESS
-		});
+			const user = await Api.post("user/authenticate", {
+				...this.state
+			});
 
-		// Fazer o login do usuário aqui
+			if (user.data.token) {
+				localStorage.setItem("token", user.data.token);
+			}
 
-		this.props.history.push("/home");
+			// Fazer o login do usuário aqui
+			this.props.history.push("/home");
+		} catch (e) {
+			this.setState({
+				step2: FAILED
+			});
+			console.warn(e);
+		}
 	};
 
 	validateField = step => {

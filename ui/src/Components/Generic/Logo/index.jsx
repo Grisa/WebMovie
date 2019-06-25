@@ -20,7 +20,11 @@ const text = {
 	alignItems: "center"
 };
 
-const Logo = ({ variant = "text", alignItems = "center" }) => {
+const Logo = ({
+	variant = "text",
+	alignItems = "center",
+	handleClose = () => {}
+}) => {
 	const style = Object.assign(
 		{
 			display: "flex",
@@ -33,7 +37,7 @@ const Logo = ({ variant = "text", alignItems = "center" }) => {
 	);
 
 	return (
-		<Link to="/home" style={style}>
+		<Link to="/home" style={style} onClick={handleClose}>
 			<span>Nome do Site</span>
 		</Link>
 	);

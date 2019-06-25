@@ -7,6 +7,7 @@ const movieViewController = require("./Controllers/movieViewController");
 // Ações de CRUD de usuarios
 routes.post('/user/authenticate', userController.authenticate);
 routes.post('/user/create', userController.createUser);
+routes.post('/user/validate', userController.validateCreate);
 
 // Ações de CRUD de filmes
 routes.post('/movie/create', movieController.createMovie);

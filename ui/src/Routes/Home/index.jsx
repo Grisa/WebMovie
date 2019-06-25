@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
+import api from "../../Utils/Api";
+
 import LaneMovie from "../../Components/Lanes/LaneMovie";
 
 const Container = styled.div`
@@ -63,13 +65,50 @@ const filmes = [
 ];
 
 class Home extends Component {
+	state = {
+		movies: [],
+		series: [],
+		animes: []
+	};
+	async componentDidMount() {
+		const { data } = await api.post("movie/getall");
+		let movies = [],
+			series = [],
+			animes = [];
+
+		for (let i in data.data) {
+			switch (parseInt(data.data[i].type, 10)) {
+				case 1:
+					movies.push(data.data[i]);
+					break;
+				case 2:
+					series.push(data.data[i]);
+					break;
+				case 3:
+					animes.push(data.data[i]);
+					break;
+				default:
+					console.warn("Tipo não detectado");
+					break;
+			}
+		}
+
+		this.setState({
+			movies,
+			series,
+			animes
+		});
+	}
+
 	render() {
+		const { movies, series, animes } = this.state;
+
 		return (
 			<Grid>
 				<Container>
-					<LaneMovie title="Filmes" movies={filmes} {...this.props} />
-					<LaneMovie title="Séries" movies={filmes} {...this.props} />
-					<LaneMovie title="Animes" movies={filmes} {...this.props} />
+					<LaneMovie title="Filmes" movies={movies} {...this.props} />
+					<LaneMovie title="Séries" movies={series} {...this.props} />
+					<LaneMovie title="Animes" movies={animes} {...this.props} />
 					<div />
 				</Container>
 			</Grid>

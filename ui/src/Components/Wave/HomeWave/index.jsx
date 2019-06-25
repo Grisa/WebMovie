@@ -47,7 +47,7 @@ class HomeWave extends Component {
 					onClick={handleClose()}
 				/>
 				<MovieData data={data} />
-				<Evaluation />
+				<Evaluation data={data} />
 				<Comment comments={data.comments} />
 			</Container>
 		);

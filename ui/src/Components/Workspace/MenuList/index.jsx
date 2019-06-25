@@ -29,7 +29,10 @@ class MenuList extends Component {
 	};
 
 	goto = route => () => {
-		this.props.history.push(route);
+		const { handleClose, history } = this.props;
+
+		handleClose()();
+		history.push(route);
 	};
 
 	isLogged = () => {

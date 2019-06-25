@@ -37,5 +37,24 @@ module.exports = {
 		} catch (err) {
 			return res.status(400).json({ error: "Erro no cadastro" });
 		}
+	},
+
+	async validateCreate(req, res) {
+		try {
+			const { login, email } = req.body;
+
+			if (await User.findOne({
+				$or: [
+					{ login },
+					{ email }
+				]
+			})) {
+				return res.status(400).json({ error: "Usuario ja existe" });
+			}
+
+			return res.status(200).send(true);
+		} catch (err) {
+			return res.status(400).json({ error: "Erro na verificação => primeiro passo" });
+		}
 	}
 }
