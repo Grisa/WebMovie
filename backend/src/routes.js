@@ -13,6 +13,7 @@ routes.post('/user/validate', userController.validateCreate);
 routes.post('/movie/create', movieController.createMovie);
 routes.post('/movie/delete', movieController.deleteMovie);
 routes.post('/movie/update', movieController.updateMovie);
+routes.post('/movie/favorite', movieController.favoriteMovie);
 
 // Ações de consulta
 routes.post('/movie/getall', movieViewController.getAllMovies);
