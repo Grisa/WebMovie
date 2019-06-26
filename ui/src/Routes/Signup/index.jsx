@@ -176,7 +176,7 @@ class Signup extends Component {
 				isOkay = false;
 			}
 
-			if (!email) {
+			if (!email || !email.match(/.+\@(\w+\.)+\w+/g)) {
 				isOkay = false;
 			}
 
@@ -233,6 +233,7 @@ class Signup extends Component {
 						value={email}
 						label={{ icon: "asterisk" }}
 						labelPosition="right corner"
+						type="email"
 					/>
 				</InputLabel>
 				<InputLabel>
@@ -242,6 +243,7 @@ class Signup extends Component {
 						value={password}
 						label={{ icon: "asterisk" }}
 						labelPosition="right corner"
+						type="password"
 					/>
 				</InputLabel>
 			</FirstStep>
@@ -278,6 +280,7 @@ class Signup extends Component {
 						value={birthday}
 						label={{ icon: "asterisk" }}
 						labelPosition="right corner"
+						type="number"
 					/>
 				</InputLabel>
 			</SecondStep>

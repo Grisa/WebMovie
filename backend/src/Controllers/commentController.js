@@ -14,10 +14,10 @@ module.exports = {
 			} else {
 				movieC = await Comment.findOne({ name })
 				if (movieC === null) {
-					const commentM = await Comment.create({name: name, comment: [comment]});
+					const commentM = await Comment.create({ name: name, comment: [comment] });
 					return res.json({ commentM });
 				} else {
-					const commentM = await Comment.updateOne({ name }, { $set:{comment: [...movieC.comment, comment]} });
+					const commentM = await Comment.updateOne({ name }, { $set: { comment: [...movieC.comment, comment] } });
 					return res.status(200).send('ok');
 				}
 			}
@@ -28,15 +28,15 @@ module.exports = {
 
 	},
 
-	async viewComment(req,res) {
+	async viewComment(req, res) {
 
-		const comment = await Comment.find({name: req.body.name});
+		const comments = await Comment.find({ name: req.body.name });
 
-		if (comment.length > 0) {
-			return res.status(200).json( {data: comment} );
+		if (comments.length > 0) {
+			return res.status(200).json({ comments });
 		}
-		
-		return res.status(404).send("Nao existem filme comentarios com o nome: "+req.body.name);
+
+		return res.status(404).send("Nao existem filme comentarios com o nome: " + req.body.name);
 
 	}
 

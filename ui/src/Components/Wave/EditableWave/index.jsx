@@ -22,14 +22,6 @@ const InputLabel = styled.div`
 	width: 100%;
 `;
 
-/**
- * Nome
- * Descrição
- * Genero
- * Data
- * Duração
- */
-
 class EditableWave extends Component {
 	constructor(props) {
 		super(props);

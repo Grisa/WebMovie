@@ -29,6 +29,10 @@ const Container = styled.div`
  */
 
 class HomeWave extends Component {
+	isLogged() {
+		return !!localStorage.getItem("token");
+	}
+
 	render() {
 		const { handleClose, data } = this.props;
 
@@ -48,7 +52,7 @@ class HomeWave extends Component {
 				/>
 				<MovieData data={data} />
 				<Evaluation data={data} />
-				<Comment comments={data.comments} />
+				<Comment data={data} isLog={this.isLogged()} />
 			</Container>
 		);
 	}

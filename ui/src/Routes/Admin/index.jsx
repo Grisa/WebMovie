@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import api from "../../Utils/Api";
 
-import { Card } from "semantic-ui-react";
+import { Card, Image } from "semantic-ui-react";
 import { FaPlusCircle } from "react-icons/fa";
 
 import EditableWave from "../../Components/Wave/EditableWave";
@@ -39,6 +39,14 @@ class Admin extends Component {
 
 		this.setState({ data: data.data });
 	}
+
+	getImage = () => {
+		let avatares = ["matthew.png", "steve.jpg", "elliot.jpg"];
+		let i = Math.floor(Math.random() * avatares.length);
+
+		return `https://react.semantic-ui.com/images/avatar/large/${avatares[i]}`;
+	};
+
 	render() {
 		const { data } = this.state;
 		const { handleOpen } = this.props;
@@ -61,7 +69,9 @@ class Admin extends Component {
 							<Card.Header style={{ fontSize: "13pt" }}>
 								{movie.name}
 							</Card.Header>
-							<Card.Content>Cadastrar filme</Card.Content>
+							<Card.Content>
+								<Image size="medium" src={this.getImage()} />
+							</Card.Content>
 						</Card>
 					))}
 				</List>

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import { Card, Input } from "semantic-ui-react";
+import api from "../../../Utils/Api";
+import { Button, Card, Input } from "semantic-ui-react";
+import { FaArrowRight } from "react-icons/fa";
 
 const CardHeader = styled.div`
 	padding: 1em;
@@ -50,24 +52,72 @@ const VerticalLine = styled.div`
 `;
 
 export default class Comment extends Component {
+	state = {
+		comments: [],
+		comment: ""
+	};
+
+	async componentDidMount() {
+		const {
+			data: { comments }
+		} = await api.post("comment/view/", {
+			name: this.props.data.name
+		});
+
+		this.setState({
+			comments: comments[0].comment.reverse()
+		});
+	}
+
+	handleChange = field => ({ target }) => {
+		this.setState({
+			[field]: target.value
+		});
+	};
+
+	handleSubmit = async () => {
+		const { comment } = this.state;
+		const { data } = this.props;
+
+		await api.post("comment/add/", {
+			name: data.name,
+			comment
+		});
+
+		const {
+			data: { comments }
+		} = await api.post("comment/view/", {
+			name: data.name
+		});
+
+		this.setState({
+			comments: comments[0].comment.reverse(),
+			comment: ""
+		});
+	};
+
 	returnDate(timestamp) {
 		const date = new Date(timestamp);
+
+		if (!timestamp) {
+			return null;
+		}
 
 		return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 	}
 
 	renderComment = () => {
-		const { comments } = this.props;
+		const { comments } = this.state;
 
-		if (!comments) {
+		if (!comments || comments.length === 0) {
 			return <div>sem comentarios</div>;
 		}
 
 		if (comments.length === 1) {
 			return (
 				<CommentContainer>
-					<CommentAuthor>{comments[0].author}</CommentAuthor>
-					<CommentContent>{comments[0].comment}</CommentContent>
+					<CommentAuthor>{comments[0].author || "Desconhecido"}</CommentAuthor>
+					<CommentContent>{comments[0].comment || comments[0]}</CommentContent>
 				</CommentContainer>
 			);
 		}
@@ -99,31 +149,46 @@ export default class Comment extends Component {
 						width: "100%"
 					}}>
 					<CommentInfo>
-						<CommentAuthor>{comment.author}</CommentAuthor>
+						<CommentAuthor>{comment.author || "Desconhecido"}</CommentAuthor>
 						<CommentTime>{this.returnDate(comment.time)}</CommentTime>
 					</CommentInfo>
-					<CommentContent>{comment.comment}</CommentContent>
+					<CommentContent>{comment.comment || comment}</CommentContent>
 				</div>
 			</CommentContainer>
 		));
 	};
+
 	render() {
+		const { comment } = this.state;
+		const { isLog } = this.props;
+
 		return (
 			<Card
 				style={{
 					margin: "0 1em 1em 1em",
 					width: "calc(100% - 1em)",
 					height: "fit-content",
-					maxHeight: "700px",
 					gridArea: "10 / 2 / 16 / 15"
 				}}
 				fluid>
 				<CardHeader>
 					<Title>Comentários</Title>
 				</CardHeader>
-				<Card.Content>
-					<Input action={"Comentar"} fluid />
-				</Card.Content>
+				{isLog ? (
+					<Card.Content>
+						<Input
+							fluid
+							value={comment}
+							onChange={this.handleChange("comment")}
+						/>
+						<Button animated onClick={this.handleSubmit}>
+							<Button.Content visible>Comentar</Button.Content>
+							<Button.Content hidden>
+								<FaArrowRight />
+							</Button.Content>
+						</Button>
+					</Card.Content>
+				) : null}
 				<Card.Content>
 					<CommentFeed>{this.renderComment()}</CommentFeed>
 				</Card.Content>

@@ -121,7 +121,11 @@ class Signin extends Component {
 					</InputLabel>
 					<InputLabel>
 						<span>Senha</span>
-						<Input onChange={this.handleChange("password")} value={password} />
+						<Input
+							onChange={this.handleChange("password")}
+							value={password}
+							type="password"
+						/>
 					</InputLabel>
 					<ButtonLabel>
 						<Button

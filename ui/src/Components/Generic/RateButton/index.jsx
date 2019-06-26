@@ -43,7 +43,7 @@ class RateButton extends Component {
 		return (
 			<Label color={this.getLikeStatus()}>
 				<Icon name="star" style={{ color: "#fafafa" }} />
-				{value && `${value} likes`}
+				{`${value || 0} likes`}
 			</Label>
 		);
 	};

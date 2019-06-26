@@ -58,14 +58,14 @@ class App extends Component {
             : <Header handleOpen={this.handleOpen} handleClose={this.handleClose} />
         }
 
-        <Wave open={open} handleClose={this.handleClose} data={movie} component={component} />
+        <Wave open={open && !isSign} handleClose={this.handleClose} data={movie} component={component} />
         <Switch>
-          <Route exact path='/home' render={() => <Home open={open} handleOpen={this.handleOpen} />} />
-          <Route path='/ranking' render={() => <Ranking open={open} handleOpen={this.handleOpen} />} />
-          <Route path='/mylist' render={() => <MyList open={open} handleOpen={this.handleOpen} />} />
+          <Route exact path='/home' render={() => <Home open={open && !isSign} handleOpen={this.handleOpen} />} />
+          <Route path='/ranking' render={() => <Ranking open={open && !isSign} handleOpen={this.handleOpen} />} />
+          <Route path='/mylist' render={() => <MyList open={open && !isSign} handleOpen={this.handleOpen} />} />
           <Route path='/signin' component={Signin} />
           <Route path='/signup' component={Signup} />
-          <Route path='/admin' render={() => <Admin open={open} handleOpen={this.handleOpen} />} />
+          <Route path='/admin' render={() => <Admin open={open && !isSign} handleOpen={this.handleOpen} />} />
           <Route component={NoMatch} />
         </Switch>
         <Footer></Footer>
