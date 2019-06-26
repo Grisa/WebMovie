@@ -30,9 +30,9 @@ class PoolCard extends Component {
 		super(props);
 
 		this.state = {
-			title: props.title,
+			name: props.name,
 			description: props.description,
-			genry: props.genry,
+			genre: props.genre,
 			date: props.date,
 			duration: props.duration,
 			comments: props.comments,
@@ -44,7 +44,7 @@ class PoolCard extends Component {
 
 	render() {
 		const { handleOpen } = this.props;
-		const { title, description, likes, like, favorite } = this.state;
+		const { name, description, likes, like, favorite } = this.state;
 
 		return (
 			<Container>
@@ -52,7 +52,7 @@ class PoolCard extends Component {
 					<Card.Content>
 						<Grid>
 							<Info>
-								<Card.Header>{title}</Card.Header>
+								<Card.Header>{name}</Card.Header>
 								<Card.Meta>{description}</Card.Meta>
 								<OptionContainer>
 									<RateButton status={like} type="like" value={likes} />

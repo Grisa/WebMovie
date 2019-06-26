@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { FaCalendarAlt } from "react-icons/fa";
 import { Card, Icon } from "semantic-ui-react";
 
 const CardHeader = styled.div`
@@ -25,7 +24,6 @@ const GenryContainer = styled.div`
 	padding: 10px 30px;
 	font-size: 11pt;
 `;
-const DateContainer = styled.div``;
 const DurationContainer = styled.div``;
 
 const ToBottom = styled.div`
@@ -90,10 +88,6 @@ export default class MovieData extends Component {
 								flexDirection: "column",
 								justifyContent: "flex-end"
 							}}>
-							<DateContainer>
-								<FaCalendarAlt />
-								Data de lançamento: {this.returnDate(data.data)}
-							</DateContainer>
 							<DurationContainer>
 								<Icon name="clock" />
 								Duração do filme: {this.returnHour(data.duration)}

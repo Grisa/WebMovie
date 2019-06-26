@@ -46,7 +46,9 @@ class Admin extends Component {
 		return (
 			<Container>
 				<List>
-					<Card style={{ margin: "0 0 20px 0", minHeight: 290 }}>
+					<Card
+						style={{ margin: "0 0 20px 0", minHeight: 290 }}
+						onClick={handleOpen(EditableWave, { create: true })}>
 						<CreateCard>
 							<FaPlusCircle size={75} />
 						</CreateCard>

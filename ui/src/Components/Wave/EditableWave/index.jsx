@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Button, Card, Form, TextArea, Input } from "semantic-ui-react";
+import { Button, Card, Radio, Form, TextArea, Input } from "semantic-ui-react";
 import { FaArrowRight } from "react-icons/fa";
 
 import api from "../../../Utils/Api";
@@ -37,16 +37,15 @@ class EditableWave extends Component {
 		console.log(props);
 
 		this.state = {
-			name: "" || props.data.name,
-			desc: "" || props.data.description,
-			type: "" || props.data.type,
-			duration: "" || props.data.duration,
-			genre: "" || props.data.genre
+			name: props.data.name || "",
+			desc: props.data.description || "",
+			type: props.data.type || 1,
+			duration: props.data.duration || 0,
+			genre: props.data.genre || ""
 		};
 	}
 
 	returnHour(time) {
-		console.log(time);
 		let hour = Math.floor(time / (60 * 60));
 		time -= hour * 60 * 60;
 		let minutes = Math.floor(time / 60);
@@ -64,9 +63,9 @@ class EditableWave extends Component {
 		return `${hour}:${minutes}:${seconds}`;
 	}
 
-	handleChange = field => ({ target }) => {
+	handleChange = (field, value) => ({ target }) => {
 		this.setState({
-			[field]: target.value
+			[field]: value || target.value
 		});
 	};
 
@@ -93,18 +92,26 @@ class EditableWave extends Component {
 				name,
 				update: {
 					name,
-					desc,
+					description: desc,
 					type,
 					duration,
 					genre
 				}
+			});
+		} else if (data.create) {
+			api.post("movie/create", {
+				name,
+				description: desc,
+				type,
+				duration,
+				genre
 			});
 		}
 	};
 
 	render() {
 		const { handleClose, data } = this.props;
-		const { name, desc, genre, duration } = this.state;
+		const { name, desc, type, genre, duration } = this.state;
 
 		return (
 			<Container>
@@ -138,6 +145,25 @@ class EditableWave extends Component {
 						<InputLabel>
 							<span>Genero</span>
 							<Input value={genre} onChange={this.handleChange("genre")} />
+						</InputLabel>
+						<InputLabel>
+							<span>Genero</span>
+							<Radio
+								label="Filme"
+								checked={type === 1}
+								onClick={this.handleChange("type", 1)}
+								defaultChecked
+							/>
+							<Radio
+								label="Série"
+								checked={type === 2}
+								onClick={this.handleChange("type", 2)}
+							/>
+							<Radio
+								label="Anime"
+								checked={type === 3}
+								onClick={this.handleChange("type", 3)}
+							/>
 						</InputLabel>
 						<InputLabel>
 							<span>Duração</span>

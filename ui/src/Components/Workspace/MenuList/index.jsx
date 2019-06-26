@@ -6,7 +6,8 @@ import SearchWave from "../../Wave/SearchWave";
 const options = [
 	{ key: "1", text: "Home", value: "/home", onlyLogged: false },
 	{ key: "2", text: "Ranking", value: "/ranking", onlyLogged: false },
-	{ key: "3", text: "Minha lista", value: "/mylist", onlyLogged: true }
+	{ key: "3", text: "Minha lista", value: "/mylist", onlyLogged: true },
+	{ key: "4", text: "Criação de conteúdo", value: "/admin", onlyLogged: true }
 ];
 
 class MenuList extends Component {
