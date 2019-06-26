@@ -134,7 +134,7 @@ class Signup extends Component {
 		}
 
 		try {
-			const { data } = await Api.post("user/create", {
+			await Api.post("user/create", {
 				login,
 				password,
 				email,
@@ -143,19 +143,16 @@ class Signup extends Component {
 				idade: birthday
 			});
 
-			if (data) {
-				console.log(data);
-			}
 			this.setState({
 				step2: SUCCESS
 			});
 
-			const user = await Api.post("user/authenticate", {
+			const { data } = await Api.post("user/authenticate", {
 				...this.state
 			});
 
-			if (user.data.token) {
-				localStorage.setItem("token", user.data.token);
+			if (data.token) {
+				localStorage.setItem("token", data.token);
 			}
 
 			// Fazer o login do usuário aqui
@@ -222,15 +219,30 @@ class Signup extends Component {
 			<FirstStep>
 				<InputLabel>
 					<span>Login</span>
-					<Input onChange={this.handleChange("login")} value={login} />
+					<Input
+						onChange={this.handleChange("login")}
+						value={login}
+						label={{ icon: "asterisk" }}
+						labelPosition="right corner"
+					/>
 				</InputLabel>
 				<InputLabel>
 					<span>Email</span>
-					<Input onChange={this.handleChange("email")} value={email} />
+					<Input
+						onChange={this.handleChange("email")}
+						value={email}
+						label={{ icon: "asterisk" }}
+						labelPosition="right corner"
+					/>
 				</InputLabel>
 				<InputLabel>
 					<span>Senha</span>
-					<Input onChange={this.handleChange("password")} value={password} />
+					<Input
+						onChange={this.handleChange("password")}
+						value={password}
+						label={{ icon: "asterisk" }}
+						labelPosition="right corner"
+					/>
 				</InputLabel>
 			</FirstStep>
 		);
@@ -243,15 +255,30 @@ class Signup extends Component {
 			<SecondStep>
 				<InputLabel>
 					<span>Nome</span>
-					<Input onChange={this.handleChange("name")} value={name} />
+					<Input
+						onChange={this.handleChange("name")}
+						value={name}
+						label={{ icon: "asterisk" }}
+						labelPosition="right corner"
+					/>
 				</InputLabel>
 				<InputLabel>
 					<span>Sobrenome</span>
-					<Input onChange={this.handleChange("lastName")} value={lastName} />
+					<Input
+						onChange={this.handleChange("lastName")}
+						value={lastName}
+						label={{ icon: "asterisk" }}
+						labelPosition="right corner"
+					/>
 				</InputLabel>
 				<InputLabel>
 					<span>Data de nascimento</span>
-					<Input onChange={this.handleChange("birthday")} value={birthday} />
+					<Input
+						onChange={this.handleChange("birthday")}
+						value={birthday}
+						label={{ icon: "asterisk" }}
+						labelPosition="right corner"
+					/>
 				</InputLabel>
 			</SecondStep>
 		);

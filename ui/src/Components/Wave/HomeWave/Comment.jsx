@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import { Card } from "semantic-ui-react";
+import { Card, Input } from "semantic-ui-react";
 
 const CardHeader = styled.div`
 	padding: 1em;
@@ -121,6 +121,9 @@ export default class Comment extends Component {
 				<CardHeader>
 					<Title>Comentários</Title>
 				</CardHeader>
+				<Card.Content>
+					<Input action={"Comentar"} fluid />
+				</Card.Content>
 				<Card.Content>
 					<CommentFeed>{this.renderComment()}</CommentFeed>
 				</Card.Content>

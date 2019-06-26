@@ -28,18 +28,6 @@ class MyList extends Component {
 					<ListCard />
 					<ListCard />
 					<ListCard />
-					<ListCard />
-					<ListCard />
-					<ListCard />
-					<ListCard />
-					<ListCard />
-					<ListCard />
-					<ListCard />
-					<ListCard />
-					<ListCard />
-					<ListCard />
-					<ListCard />
-					<ListCard />
 				</List>
 			</Container>
 		);

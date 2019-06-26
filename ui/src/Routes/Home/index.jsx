@@ -21,55 +21,13 @@ const Grid = styled.div`
 	grid-template-columns: 1fr 13fr 1fr;
 `;
 
-const filmes = [
-	{
-		title: "filme 1",
-		description: "filme 1",
-		image: "https://react.semantic-ui.com/images/avatar/large/daniel.jpg"
-	},
-	{
-		title: "filme 2",
-		description: "filme 2",
-		image: "https://react.semantic-ui.com/images/avatar/large/elliot.jpg"
-	},
-	{
-		title: "filme 3",
-		description: "filme 3",
-		image: "https://react.semantic-ui.com/images/avatar/large/daniel.jpg"
-	},
-	{
-		title: "filme 4",
-		description: "filme 4",
-		image: "https://react.semantic-ui.com/images/avatar/large/elliot.jpg"
-	},
-	{
-		title: "filme 5",
-		description: "filme 5",
-		image: "https://react.semantic-ui.com/images/avatar/large/daniel.jpg"
-	},
-	{
-		title: "filme 6",
-		description: "filme 6",
-		image: "https://react.semantic-ui.com/images/avatar/large/elliot.jpg"
-	},
-	{
-		title: "filme 7",
-		description: "filme 7",
-		image: "https://react.semantic-ui.com/images/avatar/large/daniel.jpg"
-	},
-	{
-		title: "filme 8",
-		description: "filme 8",
-		image: "https://react.semantic-ui.com/images/avatar/large/elliot.jpg"
-	}
-];
-
 class Home extends Component {
 	state = {
 		movies: [],
 		series: [],
 		animes: []
 	};
+	
 	async componentDidMount() {
 		const { data } = await api.post("movie/getall");
 		let movies = [],
