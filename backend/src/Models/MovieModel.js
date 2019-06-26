@@ -8,14 +8,6 @@ const RatingSchema = new mongoose.Schema({
     users: []
 });
 
-const FavoriteSchema = new mongoose.Schema({
-    user: String,
-    fav: {
-        type: Number,
-        enum: [1, 2]
-    }
-});
-
 const MovieSchema = new mongoose.Schema({
     name: String,
     description: String,
@@ -24,10 +16,13 @@ const MovieSchema = new mongoose.Schema({
     data: Date,
     type: String,
     rating: RatingSchema,
-    favorite: [FavoriteSchema]
+    favorite: [{
+			    user: String,
+			    type: String
+			  }]
 }, {
         timestamps: true
-    });
+    });	
 
 MovieSchema.pre("save", function (next) {
     if (!this.rating) {

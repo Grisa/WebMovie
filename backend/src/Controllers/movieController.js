@@ -40,5 +40,22 @@ module.exports = {
 		const data = await Movie.deleteOne({name});
 
 		return res.status(200).send('ok');
+	},
+
+	async favoriteMovie(req, res) {
+
+		const {name, user, type} = req.body;
+
+		var handleArray = [];
+		handleArray[user] = type;
+
+		const obj = await Movie.updateOne({ name }, { $set:{favorite: [{user: user,type: type}]} });
+
+		if (obj.nModified == 0) {
+			return res.status(404).send("erro ao dar favorito");
+		}
+
+		return res.status(200).send('ok');
+
 	}
 }
