@@ -38,7 +38,7 @@ const Logo = ({
 
 	return (
 		<Link to="/home" style={style} onClick={handleClose}>
-			<span>Nome do Site</span>
+			<span>Orns Seeker</span>
 		</Link>
 	);
 };

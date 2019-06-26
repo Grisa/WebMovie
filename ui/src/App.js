@@ -10,6 +10,7 @@ import Signin from "./Routes/Signin";
 import Signup from "./Routes/Signup";
 import Ranking from "./Routes/RankingList";
 import MyList from "./Routes/MyList";
+import Admin from "./Routes/Admin";
 
 const Footer = styled.div`
   height: 300px;
@@ -64,6 +65,7 @@ class App extends Component {
           <Route path='/mylist' render={() => <MyList open={open} handleOpen={this.handleOpen} />} />
           <Route path='/signin' component={Signin} />
           <Route path='/signup' component={Signup} />
+          <Route path='/admin' render={() => <Admin open={open} handleOpen={this.handleOpen} />} />
           <Route component={NoMatch} />
         </Switch>
         <Footer></Footer>
