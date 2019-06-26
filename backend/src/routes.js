@@ -3,6 +3,7 @@ const routes = new express.Router();
 const userController = require("./Controllers/userController");
 const movieController = require("./Controllers/movieController");
 const movieViewController = require("./Controllers/movieViewController");
+const commentController = require("./Controllers/commentController");
 
 // Ações de CRUD de usuarios
 routes.post('/user/authenticate', userController.authenticate);
@@ -29,6 +30,10 @@ routes.post('/serie/getbytype/', movieViewController.getSerieList);
 routes.post('/movie/getbytype/filter/', movieViewController.getMoviesListFilter);
 routes.post('/anime/getbytype/filter/', movieViewController.getAnimeListFilter);
 routes.post('/serie/getbytype/filter/', movieViewController.getSerieListFilter);
+
+// Comentarios
+routes.post('/comment/add/', commentController.addComment);
+routes.post('/comment/view/', commentController.viewComment);
 
 const authMiddleware = require("./Middlewares/auth");
 routes.use(authMiddleware);
